@@ -1,4 +1,5 @@
 from enum import Enum
+import CarInfo
 
 class CarMode(Enum):
     ECO = 'Economy'
