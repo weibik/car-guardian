@@ -38,6 +38,7 @@ def get_address_by_location(latitude, longitude, language="en"):
     except:
         return get_address_by_location(latitude, longitude)
 
+
 def get_current_coordinates():
     output = subprocess.check_output(['C:\Windows\System32\curl.exe', 'ipinfo.io/loc'])
 
