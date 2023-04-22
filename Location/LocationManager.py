@@ -45,33 +45,33 @@ def get_current_coordinates():
     latitude, longitude = output_str.split(",")
     return latitude, longitude
 
-def refresh_browser_window(window_title):
-    hwnd = win32gui.FindWindow(None, window_title)
-    if hwnd == 0:
-        print("0")
-        def enum_windows_callback(hwnd, windows):
-            if window_title in win32gui.GetWindowText(hwnd):
-                windows.append(hwnd)
-
-        windows = []
-        win32gui.EnumWindows(enum_windows_callback, windows)
-        if len(windows) > 0:
-            hwnd = windows[0]
-
-    if hwnd != 0:
-        print("1")
-        win32gui.SendMessage(hwnd, win32con.WM_COMMAND, 0x0006, 0)
-    else:
-        print("2")
-        webbrowser.open_new_tab(window_title)
-
-
-def open_map_in_browser():
-    filename = 'map.html'
-    refresh_browser_window(filename)
-
 
 def save_map_as_a_file():
+
+    def refresh_browser_window(window_title):
+        hwnd = win32gui.FindWindow(None, window_title)
+        if hwnd == 0:
+            print("0")
+
+            def enum_windows_callback(hwnd, windows):
+                if window_title in win32gui.GetWindowText(hwnd):
+                    windows.append(hwnd)
+
+            windows = []
+            win32gui.EnumWindows(enum_windows_callback, windows)
+            if len(windows) > 0:
+                hwnd = windows[0]
+
+        if hwnd != 0:
+            print("1")
+            win32gui.SendMessage(hwnd, win32con.WM_COMMAND, 0x0006, 0)
+        else:
+            print("2")
+            webbrowser.open_new_tab(window_title)
+
+    def open_map_in_browser():
+        filename = 'map.html'
+        refresh_browser_window(filename)
     latitude, longitude = get_current_coordinates()
 
     m = folium.Map(location=[latitude, longitude], zoom_start=13)
