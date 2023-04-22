@@ -29,3 +29,5 @@ def get_address_by_location(latitude, longitude, language="en"):
         return app.reverse(coordinates, language=language).raw
     except:
         return get_address_by_location(latitude, longitude)
+
+

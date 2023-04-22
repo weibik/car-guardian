@@ -30,6 +30,8 @@ class CarUserSetup:
     def set_driver_info(self, driver_info):
         self.driver_info = driver_info
 
+<<<<<<< HEAD
+
 
 def set_location():
     """
@@ -43,5 +45,6 @@ def set_location():
 
     information = get_address_by_location(latitude, longitude)
     location = information["display_name"]
-    print(location)
+
     return location
+
