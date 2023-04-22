@@ -1,4 +1,7 @@
 import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 
 from CarInfo.CarInfo import set_location
 
@@ -28,8 +31,6 @@ def send_email():
         This message is send automatically.
                     Safety Car
     """
-
-
     # Log in to the SMTP server
     server = smtplib.SMTP(smtp_server, port)
     server.starttls()
@@ -40,3 +41,26 @@ def send_email():
 
     # Log out of the SMTP server
     server.quit()
+
+
+def send_email_with_file():
+    # Tworzenie treści wiadomości
+    message = MIMEMultipart()
+    message['Subject'] = 'Raport SafetyCar 04/05.2023'
+    message['From'] = 'hachatonagh123@gmail.com'
+    message['To'] = 'wojtek.pasiu@gmail.com'
+    text = MIMEText('Wiadomość wygenerowana automatycznie.')
+    message.attach(text)
+
+    # Dodawanie załącznika
+    filename = "C:/Users/Dell/Desktop/hackaton/car-guardian/Gadgets/CarSafety raport.pdf"
+    with open(filename, 'rb') as file:
+        attach = MIMEApplication(file.read(), _subtype='pdf')
+        attach.add_header('Content-Disposition', 'attachment', filename=filename)
+        message.attach(attach)
+
+    # Wysyłanie wiadomości e-mail
+    with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+        smtp.starttls()
+        smtp.login('hachatonagh123@gmail.com', 'vlmpfaflxnvuudfp')
+        smtp.send_message(message)

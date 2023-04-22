@@ -30,7 +30,6 @@ class CarUserSetup:
     def set_driver_info(self, driver_info):
         self.driver_info = driver_info
 
-
 def set_location():
     """
     This method sets current location of a user. It is updated every one second :)))
