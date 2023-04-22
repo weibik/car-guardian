@@ -1,5 +1,5 @@
-from geopy.geocoders import Nominatim
+def print_hi(name):
+    print(f'Hi, {name}')
 
-geolocator = Nominatim(user_agent="my_app_name")
-location = geolocator.geocode("ul. Mickiewicza 9, Warszawa, Polska", headers={'User-Agent': 'Mozilla/5.0'})
-print((location.latitude, location.longitude))
+if __name__ == '__main__':
+    print_hi('PyCharm')
