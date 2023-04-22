@@ -17,8 +17,10 @@ def get_location_by_address(address):
         return get_location_by_address(address)
 
 def get_address_by_location(latitude, longitude, language="en"):
-    """This function returns an address as raw from a location
-    will repeat until success"""
+    """
+    This function returns an address as raw from a location
+    will repeat until success
+    """
     # build coordinates string to pass to reverse() function
     coordinates = f"{latitude}, {longitude}"
     # sleep for a second to respect Usage Policy
