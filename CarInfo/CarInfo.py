@@ -30,8 +30,6 @@ class CarUserSetup:
     def set_driver_info(self, driver_info):
         self.driver_info = driver_info
 
-<<<<<<< HEAD
-
 
 def set_location():
     """
