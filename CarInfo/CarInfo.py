@@ -2,7 +2,7 @@ import subprocess
 from enum import Enum
 import CarInfo
 
-from Location.LocationManager import get_address_by_location
+from Location.LocationManager import get_address_by_location, get_current_coordinates
 
 
 class CarMode(Enum):
@@ -29,6 +29,7 @@ class CarUserSetup:
 
     def set_driver_info(self, driver_info):
         self.driver_info = driver_info
+
 
 def set_location():
     """
