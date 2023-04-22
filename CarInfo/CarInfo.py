@@ -1,10 +1,14 @@
+import subprocess
 from enum import Enum
+
+from Location.LocationManager import get_address_by_location
+
 
 class CarMode(Enum):
     ECO = 'Economy'
     SPORT = 'Sport'
 
-# this class contains max values and user set up for Class Car
+
 class CarUserSetup:
     def __init__(self, mode=CarMode.ECO, max_speed=120, range=500, driver_info={}, location=None):
         self.carMode = mode
@@ -25,6 +29,18 @@ class CarUserSetup:
     def set_driver_info(self, driver_info):
         self.driver_info = driver_info
 
-    def set_location(self):
-        new_location = geolocator.geocode("ul. Nowogrodzka 47a, Warszawa, Polska") # current addres from car
-        self.location = new_location
+
+def set_location():
+    """
+    This method sets current location of a user. It is updated every one second :)))
+    :return:
+    """
+    output = subprocess.check_output(['C:\Windows\System32\curl.exe', 'ipinfo.io/loc'])
+
+    output_str = output.decode('utf-8')
+    latitude, longitude = output_str.split(",")
+
+    information = get_address_by_location(latitude, longitude)
+    location = information["display_name"]
+    print(location)
+    return location
