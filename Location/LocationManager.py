@@ -1,8 +1,10 @@
+import subprocess
 from geopy.geocoders import Nominatim
 import time
 from pprint import pprint
 
 app = Nominatim(user_agent="tutorial")
+
 
 def get_location_by_address(address):
     """
@@ -15,6 +17,7 @@ def get_location_by_address(address):
         return app.geocode(address).raw
     except:
         return get_location_by_address(address)
+
 
 def get_address_by_location(latitude, longitude, language="en"):
     """
@@ -30,4 +33,11 @@ def get_address_by_location(latitude, longitude, language="en"):
     except:
         return get_address_by_location(latitude, longitude)
 
+
+def get_current_coordinates():
+    output = subprocess.check_output(['C:\Windows\System32\curl.exe', 'ipinfo.io/loc'])
+
+    output_str = output.decode('utf-8')
+    latitude, longitude = output_str.split(",")
+    return latitude, longitude
 
