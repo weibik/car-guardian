@@ -1,25 +1,42 @@
 import smtplib
 
-smtp_server = 'smtp.gmail.com'
-port = 587
-sender_email = 'hachatonagh123@gmail.com'
-password = 'vlmpfaflxnvuudfp'
-receiver_email = 'jan.krol.legowski@gmail.com'
+from CarInfo.CarInfo import set_location
 
-# Create the message
-message = """\
-Subject: Car Alert
 
-This message is send automatically to inform you that your car is drived by , which increase the risk of stluczka and rozjebane sprzeglo.
-"""
+def send_email():
+    smtp_server = 'smtp.gmail.com'
+    port = 587
+    sender_email = 'hachatonagh123@gmail.com'
+    password = 'vlmpfaflxnvuudfp'
+    receiver_email = 'wojtek.pasiu@gmail.com'
 
-# Log in to the SMTP server
-server = smtplib.SMTP(smtp_server, port)
-server.starttls()
-server.login(sender_email, password)
+    location = set_location()
 
-# Send the email
-server.sendmail(sender_email, receiver_email, message)
+    polish_chars = "ąćęłńóśźż"
+    english_chars = "acelnoszz"
+    translation_table = str.maketrans(polish_chars, english_chars)
 
-# Log out of the SMTP server
-server.quit()
+    translated_location = location.translate(translation_table)
+
+    message = f"""\
+    Temat: Car Alert
+
+    Your car is active.
+        Current location: 
+        {translated_location}
+
+        This message is send automatically.
+                    Safety Car
+    """
+
+
+    # Log in to the SMTP server
+    server = smtplib.SMTP(smtp_server, port)
+    server.starttls()
+    server.login(sender_email, password)
+
+    # Send the email
+    server.sendmail(sender_email, receiver_email, message)
+
+    # Log out of the SMTP server
+    server.quit()

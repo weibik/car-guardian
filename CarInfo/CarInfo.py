@@ -26,6 +26,23 @@ class CarUserSetup:
     def set_driver_info(self, driver_info):
         self.driver_info = driver_info
 
+<<<<<<< Updated upstream
     def set_location(self):
         new_location = geolocator.geocode("ul. Nowogrodzka 47a, Warszawa, Polska") # current addres from car
         self.location = new_location
+=======
+
+def set_location():
+    """
+    This method sets current location of a user. It is updated every one second :)))
+    :return:
+    """
+    output = subprocess.check_output(['C:\Windows\System32\curl.exe', 'ipinfo.io/loc'])
+
+    output_str = output.decode('utf-8')
+    latitude, longitude = output_str.split(",")
+
+    information = get_address_by_location(latitude, longitude)
+    location = information["display_name"]
+    return location
+>>>>>>> Stashed changes
