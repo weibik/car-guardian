@@ -1,5 +1,6 @@
 import subprocess
 from enum import Enum
+import CarInfo
 
 from Location.LocationManager import get_address_by_location
 
